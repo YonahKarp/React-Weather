@@ -1,10 +1,14 @@
 {
-  "name": "weatherReact",
+  "name": "weather-react",
   "version": "0.1.0",
   "description": "",
+  "homepage": "https://yonahkarp.github.io/React-Weather",
+
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "start": "node-sass --watch src/scss -o src/css | parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --public-url '.'"
   },
   "license": "MIT",
   "dependencies": {

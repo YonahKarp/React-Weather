@@ -69,7 +69,7 @@ const mapDispatchToProps = (dispatch) => {
 		onDayClick: function(index, weather) {
             this.setState({activeIndex: index});
 
-            fetch("http://localhost:5000/?time="+weather.time)
+            fetch("https://darksky-weather-server.herokuapp.com/?time="+weather.time)
                 .then((res) => res.json())
                 .then(json => {
                     dispatch(setActiveWeatherAndTimeline(weather, json.hourly));

@@ -12,7 +12,7 @@ import Timeline from './Timeline';
 import Forecast from './Forecast';
 
 
-let API = "http://localhost:5000/";
+let API = "https://darksky-weather-server.herokuapp.com/";
 
 export class App extends Component {
 
