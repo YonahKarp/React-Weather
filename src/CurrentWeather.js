@@ -8,21 +8,17 @@ import './css/current.css'
 export class CurrentWeather extends Component {
 
     render() {
-        var hasData = !!this.props.active.summary,
-            isCurrent = this.props.active.temperature ? true : false;
+        var isCurrent = this.props.active.temperature ? true : false;
 
         return (
-            //
             <div className="currentWeather" data-icon={this.props.active.icon}>
                 <WeatherAnimations/>
 
-                {hasData &&
-                    <div className="time font18">
-                        <span>{new Date(this.props.active.time*1000).toLocaleString('en-US', { weekday: 'long', month: 'short', day: 'numeric'})}</span>
-                    </div>
-                }
+                <div className="time font18">
+                    <span>{new Date(this.props.active.time*1000).toLocaleString('en-US', { weekday: 'long', month: 'short', day: 'numeric'})}</span>
+                </div> 
 
-                {hasData && isCurrent && <div>
+                {isCurrent && <div>
                     <div className="temp">
                         <div className="currentTemp semibold">
                             <div className={'icon icon-' + this.props.active.icon}></div>
@@ -50,7 +46,7 @@ export class CurrentWeather extends Component {
                     </div>     
                 </div>}
 
-                {hasData && !isCurrent &&  <div className="activeInfo">
+                {!isCurrent &&  <div className="activeInfo">
                     <div className="temp">
                         <div className="currentTemp  semibold">
                             <div className={'icon icon-' + this.props.active.icon}></div>
@@ -75,11 +71,6 @@ export class CurrentWeather extends Component {
 const mapStateToProps = (state) => ({
     active: state.active,
     hourly: state.weatherData.hourly || {data: [{}]}
-
-    
 })
 
-const mapDispatchToProps = {
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CurrentWeather);
+export default connect(mapStateToProps)(CurrentWeather);

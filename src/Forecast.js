@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import {setActiveWeatherAndTimeline} from "./actions"
+import {setActiveWeatherAndTimeline, setData} from "./actions"
+import { mockData } from './MockData'
 
 import './css/forecast.css'
 import './css/icons.css'
@@ -49,8 +50,6 @@ export class Forecast extends Component {
                             <span className="low">{ Math.round(e.temperatureLow)}&deg;</span>
                         </div>
                         <div className="feelsLike font14">RealFeel { Math.round(e.apparentTemperatureHigh || e.apparentTemperature)}&deg;</div>
-
-
                         <div className="summary">{e.summary}</div>
                     </div>
                 })}
@@ -67,16 +66,24 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onDayClick: function(index, weather) {
-            this.setState({activeIndex: index});
 
-            fetch("https://darksky-weather-server.herokuapp.com/?time="+weather.time)
-                .then((res) => res.json())
-                .then(json => {
-                    dispatch(setActiveWeatherAndTimeline(weather, json.hourly));
-                }).catch(() => {
-                    console.log("data failed")
-                });
-		}
+            if(this.state.activeIndex != index){
+                this.setState({activeIndex: index});
+
+                fetch("https://darksky-weather-server.herokuapp.com/?time="+weather.time)
+                    .then((res) => res.json())
+                    .then(json => {
+                        dispatch(setActiveWeatherAndTimeline(weather, json.hourly));
+                    }).catch(() => {
+                        console.log("data failed")
+                        this.props.onDataFetched(mockData)
+                    });
+            }
+        },
+        
+        onDataFetched: (data) => {
+			dispatch(setData(data))
+		},
 	}
 }
 

@@ -7,7 +7,8 @@ const initialState = {
         daily: {data:[]},
         hourly: {data:[]},
     },
-    active: {}
+    active: {},
+    doneLoading: false
 
 }
 export const store = createStore(reducer, initialState);

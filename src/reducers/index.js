@@ -19,7 +19,8 @@ function reducer(state, action) {
                     ...action.payload.weatherData.currently,
                     temperatureHigh: action.payload.weatherData.daily.data[0].temperatureHigh,
                     temperatureLow: action.payload.weatherData.daily.data[0].temperatureLow,
-                }
+                },
+                doneLoading: true
 
             }
         case SET_ACTIVE_WEATHER:

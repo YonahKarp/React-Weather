@@ -31,29 +31,44 @@ export class App extends Component {
 	}
 
 	render() {
+
+		debugger
 		return (
 			<div>
-				<InfoBar/>
-				<CurrentWeather />
-				<MoreInfo/>
-				<Timeline/>
-				<Forecast/>
-				<div className="attribution">Powered by Dark Sky</div>
+				{this.props.doneLoading && <div>
+					<InfoBar/>
+					<CurrentWeather />
+					<MoreInfo/>
+					<Timeline/>
+					<Forecast/>
+					<div className="attribution">Powered by Dark Sky</div>
+				</div>}
+				{!this.props.doneLoading && <div className="Loading">
+					<div className="loader">
+						<div>Loading</div>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</div>}
 			</div>
 		)
 	}
 }
 
+const mapStateToProps = (state) => ({
+    doneLoading: state.doneLoading
+})
+
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onDataFetched: (data) => {
 			dispatch(setData(data))
-		},
-		onDataFailed: () => {
-			dispatch(setData({}))
 		}
 	}
 }
 
-export default connect(null, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
 

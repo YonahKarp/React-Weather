@@ -5,6 +5,39 @@ body{
     color: #0a0a0a;
 }
 
+.loading{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: whitesmoke;
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .loader{
+        > span {
+            animation: loader .9s -.6s infinite cubic-bezier(.85,.25,.37,.85);
+            border-radius: 5px;
+            margin: 2px;
+            height: 30px;
+            display: inline-block;
+            width: 5px;
+            background-color: dimgray;
+
+            &:nth-child(3), &:nth-child(5){animation-delay: -.4s!important}
+            &:nth-child(2), &:nth-child(6){animation-delay: -.2s!important}
+        }
+    }
+}
+
+//loader
+@keyframes loader {
+    0%,100% {transform: scaleY(1)}
+    50% {transform: scaleY(.4)}
+}
+
 .attribution{
     position: fixed;
     bottom: 5px;
