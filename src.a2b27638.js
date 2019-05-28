@@ -31281,7 +31281,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       this.setState({
         activeIndex: index
       });
-      fetch("http://localhost:5000/?time=" + weather.time).then(function (res) {
+      fetch("https://darksky-weather-server.herokuapp.com/?time=" + weather.time).then(function (res) {
         return res.json();
       }).then(function (json) {
         dispatch((0, _actions.setActiveWeatherAndTimeline)(weather, json.hourly));
@@ -31337,7 +31337,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var API = "http://localhost:5000/";
+var API = "https://darksky-weather-server.herokuapp.com/";
 
 var App =
 /*#__PURE__*/
@@ -31556,7 +31556,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51039" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55796" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
