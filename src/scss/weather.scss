@@ -1,0 +1,142 @@
+.weatherAnimations{
+  .rain{display: none;}
+  .stars, .twinkling, .clouds {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    width:100%;
+    height:100%;
+    display:none;
+  }
+}
+
+
+
+.clearSky{
+    background: url(http://www.pngall.com/wp-content/uploads/2016/03/Cloud-PNG-3.png) no-repeat center center / cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+
+.rays{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 11;
+}
+
+.ray{
+  position: absolute;
+  width: 100%;
+  max-width: 600px;
+  height: 100%;
+  // clip-path: polygon(0% 0%, 100% 100%, 90% 100%);
+  background: linear-gradient(to  right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0));
+}
+
+.ray1{
+	clip-path: polygon(0% 0%, 80% 100%, 70% 100%);
+}
+
+$ray: 9;
+@for $i from 0 through $ray {
+  $x: 100%; $y: 100%; $x2: 100%; $y2: 100%;
+  @if $i <= 4{
+    $x: (100 - 20*$i) * 1%; $x2: (90 - 20*$i) * 1%;
+    $y: 100%; $y2: 100%;
+  }@else{
+    $x: 100%; $x2: 100%;
+    $y: (100 - 20*($i % 4 )) * 1%; $y2: (90 - 20*($i % 4 )) * 1%;
+  }
+  $delay: $i*3 + 3s;
+  $opacity: (random(40) + 60) * 0.01;
+  $duration: random(2) + 6s;
+
+  .ray:nth-of-type(#{$i}) {
+    clip-path: polygon(0% 0%, $x $y, $x2 $y2);
+
+    animation: ray#{$i} $duration ease-in-out $delay infinite;
+    opacity: 0;
+  }
+
+  @keyframes ray#{$i} {
+    0% {opacity: 0;}
+    50% {opacity: $opacity;}
+    100% {opacity: 0;}
+  }
+}
+
+
+//stars
+.stars {
+  background:#000 url(http://www.script-tutorials.com/demos/360/images/stars.png) repeat top center;
+  z-index:0;
+}
+
+.twinkling{
+  background:transparent url(http://www.script-tutorials.com/demos/360/images/twinkling.png) repeat top center;
+  z-index:1;
+  animation:move-twink-back 200s linear infinite;
+}
+
+.clouds{
+    background:transparent url(http://www.script-tutorials.com/demos/360/images/clouds3.png) repeat top center;
+    z-index:3;
+    animation:move-clouds-back 200s linear infinite;
+
+    filter: grayscale(100%) contrast(0%) brightness(200%);
+}
+
+@keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+
+@keyframes move-clouds-back {
+    from {background-position:0 0;}
+    to {background-position:10000px 0;}
+}
+
+//rain
+.rainDrop {
+    background: white;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #ffffff 100%);
+    height: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+  }
+  
+  $rain: 50;
+  $containerHeight: 300;
+  
+  @for $i from 1 through $rain {
+    $top: (random($containerHeight/4) + $containerHeight/4) * 1px;
+    $left: random(100) * 1vw;
+    $opacity: (random(30) + 30) * 0.01;
+    $delay: random(20) - 1s;
+    $duration: random(2) + 2s;
+  
+    .rainDrop:nth-of-type(#{$i}) {
+      animation: rain#{$i} $duration ease-in $delay infinite;
+      transform: translate($left, -$top);
+      opacity: $opacity;
+    }
+  
+    @keyframes rain#{$i} {
+      0% {
+        transform: translate($left, -$top);
+        opacity: $opacity;   
+      }
+      100% {
+        opacity: 0;
+        transform: translate($left, $top + $containerHeight/2);
+      }
+    }
+  }

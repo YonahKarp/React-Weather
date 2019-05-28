@@ -1,0 +1,29 @@
+.icon-clear-day {
+  background: url("https://vortex.accuweather.com/adc2010/images/slate/icons/4.svg") no-repeat 20% center/contain; }
+
+.icon-clear-night {
+  background: url("https://vortex.accuweather.com/adc2010/images/slate/icons/33.svg") no-repeat 20% center/contain; }
+
+.icon-rain {
+  background: url("https://vortex.accuweather.com/adc2010/images/slate/icons/18.svg") no-repeat 20% center/contain; }
+
+.icon-snow {
+  background: url("https://vortex.accuweather.com/adc2010/images/slate/icons/22.svg") no-repeat 20% center/contain; }
+
+.icon-sleet {
+  background: url("https://vortex.accuweather.com/adc2010/images/slate/icons/26.svg") no-repeat 20% center/contain; }
+
+.icon-wind {
+  background: url("https://vortex.accuweather.com/adc2010/images/slate/icons/32.svg") no-repeat 20% center/contain; }
+
+.icon-fog {
+  background: url("https://vortex.accuweather.com/adc2010/images/slate/icons/11.svg") no-repeat 20% center/contain; }
+
+.icon-cloudy {
+  background: url("https://vortex.accuweather.com/adc2010/images/slate/icons/7.svg") no-repeat 20% center/contain; }
+
+.icon-partly-cloudy-day {
+  background: url("https://vortex.accuweather.com/adc2010/images/slate/icons/3.svg") no-repeat 20% center/contain; }
+
+.icon-partly-cloudy-night {
+  background: url("https://vortex.accuweather.com/adc2010/images/slate/icons/35.svg") no-repeat 20% center/contain; }

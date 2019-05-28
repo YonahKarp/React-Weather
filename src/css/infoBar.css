@@ -1,0 +1,11 @@
+.infoBar {
+  justify-content: space-around;
+  background: whitesmoke;
+  padding: 10px 0; }
+
+.moreInfo {
+  text-align: center;
+  padding: 15px;
+  background: whitesmoke; }
+  .moreInfo .info {
+    margin: 10px 0; }

@@ -1,0 +1,77 @@
+.currentWeather{
+    position: relative;
+
+    text-align: center;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background: radial-gradient(farthest-corner at 0 0,
+      #ffffff, #B9DFFF 15%, #4BA0DB, #004390);
+    background: linear-gradient(to bottom right, #ffffff, #B9DFFF 15%, #4BA0DB, #004390);
+
+    .icon{
+        display: inline-block;
+        height: 35px;
+        width: 44px;
+    }
+
+    &[data-icon*="night"],  &[data-icon*="rain"], &[data-icon="cloudy"]{
+        .clearSky{display: none;}
+    }
+
+    &[data-icon*="night"]{
+        color: white;
+
+        .stars, .twinkling{display: block;}
+    }
+
+    &[data-icon*="cloud"] .clouds{display: block;}
+    &[data-icon="cloudy"]{
+        color: whitesmoke;
+        background: linear-gradient(to bottom, #222222, #555555 , dimgray);
+    } 
+
+    &[data-icon="partly-cloudy-day"]{
+        .clouds{
+            filter: grayscale(100%) contrast(0%) brightness(300%);
+        }
+    } 
+
+
+
+
+    &[data-icon*="rain"]{
+        color: whitesmoke;
+
+        .rain, .clouds{display: block;}
+        background: linear-gradient(to bottom, #222222, #555555 , dimgray);
+    } 
+    
+    .activeInfo{
+        position: relative;
+        z-index: 10;;
+    }
+    .temp{
+        z-index: 10;
+        position: relative;
+        text-align: center;
+
+        .currentTemp{font-size: 30px;}
+    }
+
+    .summary{
+        margin: 15px auto 0;
+        max-width: 80%;
+        min-width: 350px;;
+    }
+}
+
+.time{
+    position: absolute;
+    z-index: 10;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}

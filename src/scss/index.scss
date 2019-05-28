@@ -1,0 +1,20 @@
+@import './presets.scss';
+
+body{
+    background: lightgray;
+    color: #0a0a0a;
+}
+
+.attribution{
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+
+
+    background: black;
+    color: white;
+    padding: 10px 15px;
+    display: inline-block;
+    border-radius: 5px;
+
+}

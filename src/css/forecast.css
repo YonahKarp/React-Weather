@@ -1,0 +1,36 @@
+.forecast {
+  white-space: nowrap;
+  overflow-x: scroll;
+  padding: 15px;
+  background-color: whitesmoke; }
+  .forecast::-webkit-scrollbar {
+    display: none; }
+
+.forecastDay {
+  background: #e0e0e0;
+  cursor: pointer;
+  white-space: normal;
+  border: 2px solid dimgray;
+  padding: 10px;
+  display: inline-block;
+  max-width: 30vw;
+  min-width: 220px;
+  border-right: none; }
+  .forecastDay.active {
+    box-shadow: 8px 2px 6px rgba(0, 0, 0, 0.3);
+    position: relative;
+    background: whitesmoke; }
+  .forecastDay:last-child {
+    border-right: 2px solid dimgray; }
+  .forecastDay .day {
+    color: seagreen; }
+  .forecastDay .date, .forecastDay .low, .forecastDay .feelsLike {
+    color: dimgray; }
+  .forecastDay .icon {
+    min-height: 50px; }
+  .forecastDay .temp {
+    font-size: 30px; }
+
+@media only screen and (min-width: 1250) {
+  .forecast {
+    justify-content: center; } }

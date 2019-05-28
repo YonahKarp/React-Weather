@@ -1,0 +1,40 @@
+$baseUrl: "https://vortex.accuweather.com/adc2010/images/slate/icons/";
+
+
+.icon-clear-day{
+    background: url($baseUrl + 4 + ".svg") no-repeat 20% center / contain;
+}
+.icon-clear-night{
+    background: url($baseUrl + 33 + ".svg") no-repeat 20% center / contain;
+}
+.icon-rain{
+    background: url($baseUrl + 18 + ".svg") no-repeat 20% center / contain;
+}
+
+.icon-snow{
+    background: url($baseUrl + 22 + ".svg") no-repeat 20% center / contain;
+
+}
+.icon-sleet{
+    background: url($baseUrl + 26 + ".svg") no-repeat 20% center / contain;
+}
+
+.icon-wind{
+    background: url($baseUrl + 32 + ".svg") no-repeat 20% center / contain;
+}
+.icon-fog{
+    background: url($baseUrl + 11 + ".svg") no-repeat 20% center / contain;
+}
+
+.icon-cloudy{
+    background: url($baseUrl + 7 + ".svg") no-repeat 20% center / contain;
+
+}
+.icon-partly-cloudy-day{
+    background: url($baseUrl + 3 + ".svg") no-repeat 20% center / contain;
+}
+
+.icon-partly-cloudy-night{
+    background: url($baseUrl + 35 + ".svg") no-repeat 20% center / contain;
+}
+

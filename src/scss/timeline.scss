@@ -1,0 +1,87 @@
+.timeline{
+    max-width: 90%;
+    min-width: 350px;
+    margin: 15px auto;
+
+}
+
+.stripes{
+
+    text-align: center;
+    border-radius: 5px;
+    height: 40px;
+
+    .stripe{
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        line-height: 40px;
+
+        overflow: hidden;
+
+        background-color: #eeeef5;
+        &.Clear{background-color: #eeeef5}
+        &.Partly.Cloudy{background-color: #d5dae2;}
+        &.Mostly.Cloudy{background-color: #b6bfcb;}
+        &.Overcast{background-color: #878f9a;}
+        &.Rain{background-color: #4a80c7}
+        &.Light.Rain, &.Drizzle{background-color: #80a5d6}
+        &.Snow{background-color: white}
+  
+        &:hover .hoverInfo{display: block;}
+
+        &:first-child{
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+
+        &:last-child{
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+    }
+}
+
+.hoverInfo{
+    position: absolute;
+    white-space: nowrap;
+    left: 50%;
+    transform: translateX(-50%);
+    top:3px;
+    z-index: 11;
+    background-color: whitesmoke;
+    border: 1px solid dimgray;
+    padding: 5px 8px;
+
+    pointer-events: none;
+
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.ticks{justify-content: space-around;}
+.hours, .temps{justify-content: space-between;}
+.hour, .temp{flex: 1 1 0;}
+
+.ticks{
+    .tick{
+        display: inline-block;
+        width: 1px;
+        height: 8px;
+        border-left: 1px solid #999;
+
+        &.odd{height: 5px;}
+    }
+}
+
+.temps .temp{
+    color: #222222;
+}
+
+
+@media only screen and (max-width: 540px){
+    .hour:nth-child(4n + 3), .temp:nth-child(4n + 3){
+        display: none;
+    }
+}
