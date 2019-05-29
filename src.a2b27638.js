@@ -30753,54 +30753,51 @@ function (_Component) {
   (0, _createClass2.default)(CurrentWeather, [{
     key: "render",
     value: function render() {
-      var hasData = !!this.props.active.summary,
-          isCurrent = this.props.active.temperature ? true : false;
-      return (//
-        _react.default.createElement("div", {
-          className: "currentWeather",
-          "data-icon": this.props.active.icon
-        }, _react.default.createElement(_WeatherAnimations.default, null), hasData && _react.default.createElement("div", {
-          className: "time font18"
-        }, _react.default.createElement("span", null, new Date(this.props.active.time * 1000).toLocaleString('en-US', {
-          weekday: 'long',
-          month: 'short',
-          day: 'numeric'
-        }))), hasData && isCurrent && _react.default.createElement("div", null, _react.default.createElement("div", {
-          className: "temp"
-        }, _react.default.createElement("div", {
-          className: "currentTemp semibold"
-        }, _react.default.createElement("div", {
-          className: 'icon icon-' + this.props.active.icon
-        }), _react.default.createElement("span", null, Math.round(this.props.active.temperature || this.props.active.temperatureHigh), "\xB0 "), _react.default.createElement("span", null, this.props.active.summary)), _react.default.createElement("div", {
-          className: "otherTempData"
-        }, _react.default.createElement("span", {
-          className: "semibold"
-        }, "Real-Feel "), _react.default.createElement("span", null, Math.round(this.props.active.apparentTemperature), "\xB0 "), this.props.active.temperatureHigh && _react.default.createElement("span", null, _react.default.createElement("span", {
-          className: "semibold"
-        }, "High "), _react.default.createElement("span", null, Math.round(this.props.active.temperatureHigh), "\xB0 ")), this.props.active.temperatureLow && _react.default.createElement("span", null, _react.default.createElement("span", {
-          className: "semibold"
-        }, "Low "), _react.default.createElement("span", null, Math.round(this.props.active.temperatureLow), "\xB0 "))), _react.default.createElement("div", {
-          className: "summary font22"
-        }, _react.default.createElement("span", null, this.props.hourly.summary)))), hasData && !isCurrent && _react.default.createElement("div", {
-          className: "activeInfo"
-        }, _react.default.createElement("div", {
-          className: "temp"
-        }, _react.default.createElement("div", {
-          className: "currentTemp  semibold"
-        }, _react.default.createElement("div", {
-          className: 'icon icon-' + this.props.active.icon
-        }), _react.default.createElement("span", {
-          className: "high "
-        }, Math.round(this.props.active.temperatureHigh), "\xB0"), _react.default.createElement("span", null, " / "), _react.default.createElement("span", {
-          className: "low"
-        }, Math.round(this.props.active.temperatureLow), "\xB0"))), _react.default.createElement("div", {
-          className: "otherTempData"
-        }, _react.default.createElement("div", {
-          className: "feelsLike font14"
-        }, "RealFeel ", Math.round(this.props.active.apparentTemperatureHigh), "\xB0"), _react.default.createElement("div", {
-          className: "summary font22"
-        }, this.props.active.summary))))
-      );
+      var isCurrent = this.props.active.temperature ? true : false;
+      return _react.default.createElement("div", {
+        className: "currentWeather",
+        "data-icon": this.props.active.icon
+      }, _react.default.createElement(_WeatherAnimations.default, null), _react.default.createElement("div", {
+        className: "time font18"
+      }, _react.default.createElement("span", null, new Date(this.props.active.time * 1000).toLocaleString('en-US', {
+        weekday: 'long',
+        month: 'short',
+        day: 'numeric'
+      }))), isCurrent && _react.default.createElement("div", null, _react.default.createElement("div", {
+        className: "temp"
+      }, _react.default.createElement("div", {
+        className: "currentTemp semibold"
+      }, _react.default.createElement("div", {
+        className: 'icon icon-' + this.props.active.icon
+      }), _react.default.createElement("span", null, Math.round(this.props.active.temperature || this.props.active.temperatureHigh), "\xB0 "), _react.default.createElement("span", null, this.props.active.summary)), _react.default.createElement("div", {
+        className: "otherTempData"
+      }, _react.default.createElement("span", {
+        className: "semibold"
+      }, "Real-Feel "), _react.default.createElement("span", null, Math.round(this.props.active.apparentTemperature), "\xB0 "), this.props.active.temperatureHigh && _react.default.createElement("span", null, _react.default.createElement("span", {
+        className: "semibold"
+      }, "High "), _react.default.createElement("span", null, Math.round(this.props.active.temperatureHigh), "\xB0 ")), this.props.active.temperatureLow && _react.default.createElement("span", null, _react.default.createElement("span", {
+        className: "semibold"
+      }, "Low "), _react.default.createElement("span", null, Math.round(this.props.active.temperatureLow), "\xB0 "))), _react.default.createElement("div", {
+        className: "summary font22"
+      }, _react.default.createElement("span", null, this.props.hourly.summary)))), !isCurrent && _react.default.createElement("div", {
+        className: "activeInfo"
+      }, _react.default.createElement("div", {
+        className: "temp"
+      }, _react.default.createElement("div", {
+        className: "currentTemp  semibold"
+      }, _react.default.createElement("div", {
+        className: 'icon icon-' + this.props.active.icon
+      }), _react.default.createElement("span", {
+        className: "high "
+      }, Math.round(this.props.active.temperatureHigh), "\xB0"), _react.default.createElement("span", null, " / "), _react.default.createElement("span", {
+        className: "low"
+      }, Math.round(this.props.active.temperatureLow), "\xB0"))), _react.default.createElement("div", {
+        className: "otherTempData"
+      }, _react.default.createElement("div", {
+        className: "feelsLike font14"
+      }, "RealFeel ", Math.round(this.props.active.apparentTemperatureHigh), "\xB0"), _react.default.createElement("div", {
+        className: "summary font22"
+      }, this.props.active.summary))));
     }
   }]);
   return CurrentWeather;
@@ -30817,9 +30814,7 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-var mapDispatchToProps = {};
-
-var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(CurrentWeather);
+var _default = (0, _reactRedux.connect)(mapStateToProps)(CurrentWeather);
 
 exports.default = _default;
 },{"@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js","@babel/runtime/helpers/possibleConstructorReturn":"node_modules/@babel/runtime/helpers/possibleConstructorReturn.js","@babel/runtime/helpers/getPrototypeOf":"node_modules/@babel/runtime/helpers/getPrototypeOf.js","@babel/runtime/helpers/inherits":"node_modules/@babel/runtime/helpers/inherits.js","react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","./WeatherAnimations":"src/WeatherAnimations.js","./css/current.css":"src/css/current.css"}],"src/css/infoBar.css":[function(require,module,exports) {
@@ -31195,6 +31190,8 @@ var _reactRedux = require("react-redux");
 
 var _actions = require("./actions");
 
+var _MockData = require("./MockData");
+
 require("./css/forecast.css");
 
 require("./css/icons.css");
@@ -31278,16 +31275,25 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     onDayClick: function onDayClick(index, weather) {
-      this.setState({
-        activeIndex: index
-      });
-      fetch("https://darksky-weather-server.herokuapp.com/?time=" + weather.time).then(function (res) {
-        return res.json();
-      }).then(function (json) {
-        dispatch((0, _actions.setActiveWeatherAndTimeline)(weather, json.hourly));
-      }).catch(function () {
-        console.log("data failed");
-      });
+      var _this3 = this;
+
+      if (this.state.activeIndex != index) {
+        this.setState({
+          activeIndex: index
+        });
+        fetch("https://darksky-weather-server.herokuapp.com/?time=" + weather.time).then(function (res) {
+          return res.json();
+        }).then(function (json) {
+          dispatch((0, _actions.setActiveWeatherAndTimeline)(weather, json.hourly));
+        }).catch(function () {
+          console.log("data failed");
+
+          _this3.props.onDataFetched(_MockData.mockData);
+        });
+      }
+    },
+    onDataFetched: function onDataFetched(data) {
+      dispatch((0, _actions.setData)(data));
     }
   };
 };
@@ -31295,7 +31301,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Forecast);
 
 exports.default = _default;
-},{"@babel/runtime/helpers/toConsumableArray":"node_modules/@babel/runtime/helpers/toConsumableArray.js","@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js","@babel/runtime/helpers/possibleConstructorReturn":"node_modules/@babel/runtime/helpers/possibleConstructorReturn.js","@babel/runtime/helpers/getPrototypeOf":"node_modules/@babel/runtime/helpers/getPrototypeOf.js","@babel/runtime/helpers/inherits":"node_modules/@babel/runtime/helpers/inherits.js","react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","./actions":"src/actions/index.js","./css/forecast.css":"src/css/forecast.css","./css/icons.css":"src/css/icons.css"}],"src/App.js":[function(require,module,exports) {
+},{"@babel/runtime/helpers/toConsumableArray":"node_modules/@babel/runtime/helpers/toConsumableArray.js","@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js","@babel/runtime/helpers/possibleConstructorReturn":"node_modules/@babel/runtime/helpers/possibleConstructorReturn.js","@babel/runtime/helpers/getPrototypeOf":"node_modules/@babel/runtime/helpers/getPrototypeOf.js","@babel/runtime/helpers/inherits":"node_modules/@babel/runtime/helpers/inherits.js","react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","./actions":"src/actions/index.js","./MockData":"src/MockData.js","./css/forecast.css":"src/css/forecast.css","./css/icons.css":"src/css/icons.css"}],"src/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31368,9 +31374,14 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", null, _react.default.createElement(_infoBar.default, null), _react.default.createElement(_CurrentWeather.default, null), _react.default.createElement(_MoreInfo.default, null), _react.default.createElement(_Timeline.default, null), _react.default.createElement(_Forecast.default, null), _react.default.createElement("div", {
+      debugger;
+      return _react.default.createElement("div", null, this.props.doneLoading && _react.default.createElement("div", null, _react.default.createElement(_infoBar.default, null), _react.default.createElement(_CurrentWeather.default, null), _react.default.createElement(_MoreInfo.default, null), _react.default.createElement(_Timeline.default, null), _react.default.createElement(_Forecast.default, null), _react.default.createElement("div", {
         className: "attribution"
-      }, "Powered by Dark Sky"));
+      }, "Powered by Dark Sky")), !this.props.doneLoading && _react.default.createElement("div", {
+        className: "Loading"
+      }, _react.default.createElement("div", {
+        className: "loader"
+      }, _react.default.createElement("div", null, "Loading"), _react.default.createElement("span", null), _react.default.createElement("span", null), _react.default.createElement("span", null), _react.default.createElement("span", null), _react.default.createElement("span", null))));
     }
   }]);
   return App;
@@ -31378,18 +31389,21 @@ function (_Component) {
 
 exports.App = App;
 
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    doneLoading: state.doneLoading
+  };
+};
+
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     onDataFetched: function onDataFetched(data) {
       dispatch((0, _actions.setData)(data));
-    },
-    onDataFailed: function onDataFailed() {
-      dispatch((0, _actions.setData)({}));
     }
   };
 };
 
-var _default = (0, _reactRedux.connect)(null, mapDispatchToProps)(App);
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(App);
 
 exports.default = _default;
 },{"@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js","@babel/runtime/helpers/possibleConstructorReturn":"node_modules/@babel/runtime/helpers/possibleConstructorReturn.js","@babel/runtime/helpers/getPrototypeOf":"node_modules/@babel/runtime/helpers/getPrototypeOf.js","@babel/runtime/helpers/inherits":"node_modules/@babel/runtime/helpers/inherits.js","react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","./css/index.css":"src/css/index.css","./actions":"src/actions/index.js","./MockData":"src/MockData.js","./CurrentWeather":"src/CurrentWeather.js","./infoBar":"src/infoBar.js","./MoreInfo":"src/MoreInfo.js","./Timeline":"src/Timeline.js","./Forecast":"src/Forecast.js"}],"node_modules/@babel/runtime/helpers/defineProperty.js":[function(require,module,exports) {
@@ -31459,7 +31473,8 @@ function reducer(state, action) {
         active: (0, _objectSpread2.default)({}, action.payload.weatherData.currently, {
           temperatureHigh: action.payload.weatherData.daily.data[0].temperatureHigh,
           temperatureLow: action.payload.weatherData.daily.data[0].temperatureLow
-        })
+        }),
+        doneLoading: true
       });
 
     case _actions.SET_ACTIVE_WEATHER:
@@ -31506,7 +31521,8 @@ var initialState = {
       data: []
     }
   },
-  active: {}
+  active: {},
+  doneLoading: false
 };
 var store = (0, _redux.createStore)(_reducers.default, initialState);
 exports.store = store;
@@ -31556,7 +31572,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55796" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62169" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

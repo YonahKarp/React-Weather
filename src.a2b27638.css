@@ -87,6 +87,34 @@ body {
   background: lightgray;
   color: #0a0a0a; }
 
+.loading {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: whitesmoke;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .loading .loader > span {
+    animation: loader 0.9s -0.6s infinite cubic-bezier(0.85, 0.25, 0.37, 0.85);
+    border-radius: 5px;
+    margin: 2px;
+    height: 30px;
+    display: inline-block;
+    width: 5px;
+    background-color: dimgray; }
+    .loading .loader > span:nth-child(3), .loading .loader > span:nth-child(5) {
+      animation-delay: -0.4s !important; }
+    .loading .loader > span:nth-child(2), .loading .loader > span:nth-child(6) {
+      animation-delay: -0.2s !important; }
+
+@keyframes loader {
+  0%, 100% {
+    transform: scaleY(1); }
+  50% {
+    transform: scaleY(0.4); } }
+
 .attribution {
   position: fixed;
   bottom: 5px;
@@ -1044,29 +1072,14 @@ body {
       background-color: #80a5d6; }
     .stripes .stripe.Snow {
       background-color: white; }
-    .stripes .stripe:hover .hoverInfo {
-      display: block; }
+    .stripes .stripe:hover {
+      filter: brightness(85%); }
     .stripes .stripe:first-child {
       border-top-left-radius: 10px;
       border-bottom-left-radius: 10px; }
     .stripes .stripe:last-child {
       border-top-right-radius: 10px;
       border-bottom-right-radius: 10px; }
-
-.hoverInfo {
-  position: absolute;
-  white-space: nowrap;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 3px;
-  z-index: 11;
-  background-color: whitesmoke;
-  border: 1px solid dimgray;
-  padding: 5px 8px;
-  pointer-events: none;
-  border-top-right-radius: 3px;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px; }
 
 .ticks {
   justify-content: space-around; }
@@ -1114,6 +1127,8 @@ body {
     box-shadow: 8px 2px 6px rgba(0, 0, 0, 0.3);
     position: relative;
     background: whitesmoke; }
+  .forecastDay:hover {
+    background-color: whitesmoke; }
   .forecastDay:last-child {
     border-right: 2px solid dimgray; }
   .forecastDay .day {
