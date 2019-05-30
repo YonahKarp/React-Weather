@@ -13,16 +13,46 @@ export class Forecast extends Component {
 		super(props);
 
 		this.state = {
-			activeIndex: 0
-		};
-	}
+            activeIndex: 0,
+            allowScroll: false
+        };
+        
+        this.forecastRef = React.createRef();
+
+
+        this.allowScroll = this.allowScroll.bind(this);
+        this.scroll = this.scroll.bind(this);
+        this.stopScroll = this.stopScroll.bind(this);
+
+        document.onmouseup = this.stopScroll;
+
+
+    }
+
+    allowScroll(e){
+        this.setState({allowScroll: true});
+    }
+
+    scroll(e){
+        if(this.state.allowScroll)
+            this.forecastRef.current.scrollBy({left: -e.movementX})
+    }
+    
+    stopScroll(e){
+        this.setState({allowScroll: false});
+    }
+
 
     render() {
         var days = [...this.props.daily.data];
         if(this.props.current.temperature)
             days.unshift(this.props.current)
         return (
-            <div className="forecast flex">
+            <div className="forecast flex"
+                ref={this.forecastRef}
+                onMouseDown={this.allowScroll}
+                onMouseMove={this.scroll}
+            >
                 {days.map((e,i) => {
 
                     var date = new Date(e.time*1000);

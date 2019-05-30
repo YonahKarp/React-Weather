@@ -3,8 +3,6 @@
   overflow-x: scroll;
   padding: 15px;
   background-color: whitesmoke; }
-  .forecast::-webkit-scrollbar {
-    display: none; }
 
 .forecastDay {
   background: #e0e0e0;

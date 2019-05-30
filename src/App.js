@@ -32,7 +32,6 @@ export class App extends Component {
 
 	render() {
 
-		debugger
 		return (
 			<div>
 				{this.props.doneLoading && <div>

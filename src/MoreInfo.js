@@ -10,17 +10,17 @@ export class infoBar extends Component {
             <div className="moreInfo">
                 <div className="info">
                     <span className="semibold">Chance of Precipitation: </span>
-                    <span>{this.props.active.precipProbability}%</span>
+                    <span>{this.props.active.precipProbability*100}%</span>
                 </div>
                 
                 <div className="info">
                     <span className="semibold">Cloud Cover: </span>
-                    <span>{this.props.active.cloudCover}%</span>
+                    <span>{this.props.active.cloudCover*100}%</span>
                 </div>
 
                 <div className="info">
                     <span className="semibold">UV Index: </span>
-                    <span>{this.props.active.uvIndex}%</span>
+                    <span>{this.props.active.uvIndex}</span>
                 </div>
 
                 <div className="info">
