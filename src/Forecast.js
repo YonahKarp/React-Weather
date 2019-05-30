@@ -14,7 +14,8 @@ export class Forecast extends Component {
 
 		this.state = {
             activeIndex: 0,
-            allowScroll: false
+            allowScroll: false,
+            didDrag: false
         };
         
         this.forecastRef = React.createRef();
@@ -34,12 +35,20 @@ export class Forecast extends Component {
     }
 
     scroll(e){
-        if(this.state.allowScroll)
+        if(this.state.allowScroll){
             this.forecastRef.current.scrollBy({left: -e.movementX})
+            this.setState({didDrag: true});
+
+        }
     }
     
     stopScroll(e){
         this.setState({allowScroll: false});
+
+        setTimeout(()=>{
+            this.setState({didDrag: false});
+
+        }, 0)
     }
 
 
@@ -97,7 +106,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		onDayClick: function(index, weather) {
 
-            if(this.state.activeIndex != index){
+            if(this.state.activeIndex != index && !this.state.didDrag){
                 this.setState({activeIndex: index});
 
                 fetch("https://darksky-weather-server.herokuapp.com/?time="+weather.time)
