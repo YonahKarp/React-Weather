@@ -31214,7 +31214,8 @@ function (_Component) {
     _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(Forecast).call(this, props));
     _this.state = {
       activeIndex: 0,
-      allowScroll: false
+      allowScroll: false,
+      didDrag: false
     };
     _this.forecastRef = _react.default.createRef();
     _this.allowScroll = _this.allowScroll.bind((0, _assertThisInitialized2.default)(_this));
@@ -31234,21 +31235,33 @@ function (_Component) {
   }, {
     key: "scroll",
     value: function scroll(e) {
-      if (this.state.allowScroll) this.forecastRef.current.scrollBy({
-        left: -e.movementX
-      });
+      if (this.state.allowScroll) {
+        this.forecastRef.current.scrollBy({
+          left: -e.movementX
+        });
+        this.setState({
+          didDrag: true
+        });
+      }
     }
   }, {
     key: "stopScroll",
     value: function stopScroll(e) {
+      var _this2 = this;
+
       this.setState({
         allowScroll: false
       });
+      setTimeout(function () {
+        _this2.setState({
+          didDrag: false
+        });
+      }, 0);
     }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var days = (0, _toConsumableArray2.default)(this.props.daily.data);
       if (this.props.current.temperature) days.unshift(this.props.current);
@@ -31261,9 +31274,9 @@ function (_Component) {
         var date = new Date(e.time * 1000);
         return _react.default.createElement("div", {
           key: "day" + i,
-          className: "forecastDay " + (i == _this2.state.activeIndex ? "active" : ""),
+          className: "forecastDay " + (i == _this3.state.activeIndex ? "active" : ""),
           onClick: function onClick() {
-            return _this2.props.onDayClick.call(_this2, i, e);
+            return _this3.props.onDayClick.call(_this3, i, e);
           }
         }, _react.default.createElement("div", {
           className: "day semibold"
@@ -31307,9 +31320,9 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     onDayClick: function onDayClick(index, weather) {
-      var _this3 = this;
+      var _this4 = this;
 
-      if (this.state.activeIndex != index) {
+      if (this.state.activeIndex != index && !this.state.didDrag) {
         this.setState({
           activeIndex: index
         });
@@ -31320,7 +31333,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
         }).catch(function () {
           console.log("data failed");
 
-          _this3.props.onDataFetched(_MockData.mockData);
+          _this4.props.onDataFetched(_MockData.mockData);
         });
       }
     },
@@ -31603,7 +31616,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57347" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63174" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
