@@ -30941,15 +30941,15 @@ function (_Component) {
         className: "info"
       }, _react.default.createElement("span", {
         className: "semibold"
-      }, "Chance of Precipitation: "), _react.default.createElement("span", null, this.props.active.precipProbability, "%")), _react.default.createElement("div", {
+      }, "Chance of Precipitation: "), _react.default.createElement("span", null, this.props.active.precipProbability * 100, "%")), _react.default.createElement("div", {
         className: "info"
       }, _react.default.createElement("span", {
         className: "semibold"
-      }, "Cloud Cover: "), _react.default.createElement("span", null, this.props.active.cloudCover, "%")), _react.default.createElement("div", {
+      }, "Cloud Cover: "), _react.default.createElement("span", null, this.props.active.cloudCover * 100, "%")), _react.default.createElement("div", {
         className: "info"
       }, _react.default.createElement("span", {
         className: "semibold"
-      }, "UV Index: "), _react.default.createElement("span", null, this.props.active.uvIndex, "%")), _react.default.createElement("div", {
+      }, "UV Index: "), _react.default.createElement("span", null, this.props.active.uvIndex)), _react.default.createElement("div", {
         className: "info"
       }, _react.default.createElement("span", {
         className: "semibold"
@@ -31182,6 +31182,8 @@ var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime
 
 var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
+
 var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
 var _react = _interopRequireWildcard(require("react"));
@@ -31211,12 +31213,39 @@ function (_Component) {
     (0, _classCallCheck2.default)(this, Forecast);
     _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(Forecast).call(this, props));
     _this.state = {
-      activeIndex: 0
+      activeIndex: 0,
+      allowScroll: false
     };
+    _this.forecastRef = _react.default.createRef();
+    _this.allowScroll = _this.allowScroll.bind((0, _assertThisInitialized2.default)(_this));
+    _this.scroll = _this.scroll.bind((0, _assertThisInitialized2.default)(_this));
+    _this.stopScroll = _this.stopScroll.bind((0, _assertThisInitialized2.default)(_this));
+    document.onmouseup = _this.stopScroll;
     return _this;
   }
 
   (0, _createClass2.default)(Forecast, [{
+    key: "allowScroll",
+    value: function allowScroll(e) {
+      this.setState({
+        allowScroll: true
+      });
+    }
+  }, {
+    key: "scroll",
+    value: function scroll(e) {
+      if (this.state.allowScroll) this.forecastRef.current.scrollBy({
+        left: -e.movementX
+      });
+    }
+  }, {
+    key: "stopScroll",
+    value: function stopScroll(e) {
+      this.setState({
+        allowScroll: false
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -31224,7 +31253,10 @@ function (_Component) {
       var days = (0, _toConsumableArray2.default)(this.props.daily.data);
       if (this.props.current.temperature) days.unshift(this.props.current);
       return _react.default.createElement("div", {
-        className: "forecast flex"
+        className: "forecast flex",
+        ref: this.forecastRef,
+        onMouseDown: this.allowScroll,
+        onMouseMove: this.scroll
       }, days.map(function (e, i) {
         var date = new Date(e.time * 1000);
         return _react.default.createElement("div", {
@@ -31301,7 +31333,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Forecast);
 
 exports.default = _default;
-},{"@babel/runtime/helpers/toConsumableArray":"node_modules/@babel/runtime/helpers/toConsumableArray.js","@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js","@babel/runtime/helpers/possibleConstructorReturn":"node_modules/@babel/runtime/helpers/possibleConstructorReturn.js","@babel/runtime/helpers/getPrototypeOf":"node_modules/@babel/runtime/helpers/getPrototypeOf.js","@babel/runtime/helpers/inherits":"node_modules/@babel/runtime/helpers/inherits.js","react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","./actions":"src/actions/index.js","./MockData":"src/MockData.js","./css/forecast.css":"src/css/forecast.css","./css/icons.css":"src/css/icons.css"}],"src/App.js":[function(require,module,exports) {
+},{"@babel/runtime/helpers/toConsumableArray":"node_modules/@babel/runtime/helpers/toConsumableArray.js","@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js","@babel/runtime/helpers/possibleConstructorReturn":"node_modules/@babel/runtime/helpers/possibleConstructorReturn.js","@babel/runtime/helpers/getPrototypeOf":"node_modules/@babel/runtime/helpers/getPrototypeOf.js","@babel/runtime/helpers/assertThisInitialized":"node_modules/@babel/runtime/helpers/assertThisInitialized.js","@babel/runtime/helpers/inherits":"node_modules/@babel/runtime/helpers/inherits.js","react":"node_modules/react/index.js","react-redux":"node_modules/react-redux/es/index.js","./actions":"src/actions/index.js","./MockData":"src/MockData.js","./css/forecast.css":"src/css/forecast.css","./css/icons.css":"src/css/icons.css"}],"src/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31374,7 +31406,6 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       return _react.default.createElement("div", null, this.props.doneLoading && _react.default.createElement("div", null, _react.default.createElement(_infoBar.default, null), _react.default.createElement(_CurrentWeather.default, null), _react.default.createElement(_MoreInfo.default, null), _react.default.createElement(_Timeline.default, null), _react.default.createElement(_Forecast.default, null), _react.default.createElement("div", {
         className: "attribution"
       }, "Powered by Dark Sky")), !this.props.doneLoading && _react.default.createElement("div", {
@@ -31572,7 +31603,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62169" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57347" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
