@@ -37,17 +37,3 @@ body{
     0%,100% {transform: scaleY(1)}
     50% {transform: scaleY(.4)}
 }
-
-.attribution{
-    position: fixed;
-    bottom: 5px;
-    right: 5px;
-
-
-    background: black;
-    color: white;
-    padding: 10px 15px;
-    display: inline-block;
-    border-radius: 5px;
-
-}
