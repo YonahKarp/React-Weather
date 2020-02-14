@@ -1,0 +1,78 @@
+@import '../constants.scss';
+
+.title{
+    text-align: center;
+    font-size: 30px;
+    padding: 30px;
+}
+
+.iconsList{
+    padding: 15px;
+    border-bottom: 2px solid white;
+
+}
+
+.homePage {
+    display: flex;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+.metrixList{
+    position: absolute;
+    transform: translateX(100%);
+    background: $colorStnd;
+    right: 0;
+    box-shadow: -6px -5px 10px $colorDark;
+
+    color: white;
+    width: 33%;
+    height: 100%;
+
+    transition: transform .2s ease;
+    transition-delay: .01s;
+
+}
+
+.metric{
+    border-bottom: 1px solid white;
+
+    .rc-swipeout-content{
+        background-color: $colorStnd;
+        padding: 15px;
+    }
+    
+    .number{
+        min-width: 15px;
+    }
+
+    input{
+        flex-grow: 1;
+        padding: 15px;
+        width: 100%;
+    }
+
+    .editBtn{
+        color: white;
+        background-color: grey;
+    }
+
+    .deleteBtn{
+        color: white;
+        background-color: red;
+    }
+}
+
+.addBtn{
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+
+    padding: 15px;
+    font-size: 18px;
+
+    background: $colorDark;
+    border-radius: 30px;
+    color: white;
+}
+
