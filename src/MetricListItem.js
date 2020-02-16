@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Swipeout from 'rc-swipeout';
-import { deleteMetric, setIndex, setCurrentScreen} from './redux/actions'
+import { deleteMetric, setIndex, setCurrentScreen, setMetricToUpdate} from './redux/actions'
 
 
 
@@ -29,6 +29,7 @@ export class MetricListItem extends Component {
                             onPress:() => {
                                 console.log("edit")
                                 this.props.onSetCurrentScreen("EditMetric")
+                                this.props.onSetMetricToUpdate(this.props.metric)
                             },
                             style: { backgroundColor: 'grey', color: 'white' },
                             className: 'editBtn'
@@ -59,7 +60,8 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		onSetIndex: (index) => {dispatch(setIndex(index))},
         onDeleteMetric: (id) => {dispatch(deleteMetric(id))},    
-        onSetCurrentScreen: (screenName) => {dispatch(setCurrentScreen(screenName))}
+        onSetCurrentScreen: (screenName) => {dispatch(setCurrentScreen(screenName))},
+        onSetMetricToUpdate: (metricToUpdate) => {dispatch(setMetricToUpdate(metricToUpdate))}
 	}
 }
 

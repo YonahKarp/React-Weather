@@ -6,7 +6,8 @@ const initialState = {
     metrix:  JSON.parse(localStorage.getItem('metrixState')) || [],
     selectedIndex: -1,
     currentScreen: 'Home',
-    lastScreen: ''
+    lastScreen: '',
+    metricToUpdate: false
 }
 
 export const store = createStore(reducer, initialState);

@@ -13,23 +13,49 @@
 }
 
 .homePage {
-    display: flex;
-    overflow: hidden;
     flex-grow: 1;
+    position: relative;
+}
+
+.charts{
+    &.screen-Metrix{
+        transition-delay: 0.05s;
+    }
+
+    box-shadow: -6px -5px 10px $colorDarker;
+
+    background: $colorDarker;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    position: absolute;
+    z-index: 10;
+    transform: translateX(100%);
+    transition: transform .6s ease;
 }
 
 .metrixList{
+    &.screen-Metrix{
+        right: 100%;
+        transform: translateX(100%) !important;
+        transition: all 0.6s ease;
+        transition-delay: .05s;
+        
+    }
     position: absolute;
     transform: translateX(100%);
     background: $colorStnd;
     right: 0;
+    top: 0;
     box-shadow: -6px -5px 10px $colorDark;
 
     color: white;
-    width: 33%;
+    // width: 33%;
+    width: 200px;
     height: 100%;
 
-    transition: transform .2s ease;
+    
+    transition: transform .1s linear, right 1s ease;
     transition-delay: .01s;
 
 }

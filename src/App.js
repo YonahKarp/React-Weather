@@ -7,6 +7,9 @@ import { setData, setCurrentScreen, setIndex} from './redux/actions'
 import Loader from './Loader';
 import Home from './Home';
 
+import AddMetric from './AddMetric'
+
+
 export class App extends Component {
 
 	async componentDidMount() {
@@ -46,6 +49,8 @@ export class App extends Component {
 				<div className="appHeader">Life Metrix</div>
 				{this.props.doneLoading && <CurrentScreen/>}
 				{!this.props.doneLoading && <Loader/>}
+				<AddMetric metric={this.props.metricToUpdate}/>
+
 			</div>
 		)
 	}
@@ -54,7 +59,8 @@ export class App extends Component {
 const mapStateToProps = (state) => ({
 	doneLoading: state.doneLoading,
 	currentScreen: state.currentScreen,
-	selectedIndex: state.selectedIndex
+	selectedIndex: state.selectedIndex,
+	metricToUpdate: state.metricToUpdate
 })
 
 const mapDispatchToProps = (dispatch) => {

@@ -14,26 +14,37 @@ export class AddMetric extends Component {
             name: ''
         }
 
-        this.cancel = this.cancel.bind(this);
+        this.close = this.close.bind(this);
         this.save = this.save.bind(this);
         this.update = this.update.bind(this);
 		this.addNewMetric = this.addNewMetric.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.metric){
+            this.setState({
+                ...nextProps.metric
+            })
+        }
 
     }
     
-    cancel() {
+    close() {
         this.setState({name: ''})
         this.props.setCurrentScreen('Home')
     }
 
     save() {
         this.addNewMetric()
-        this.cancel()
+        this.close()
     }
 
     update() {
-        // this.onUpdateMetrix()
-        this.cancel();
+        let updatedMetric = {...this.state}
+        this.props.onUpdateMetrix(updatedMetric)
+
+        this.props.onUpdateMetrix(updatedMetric)
+        this.close();
     }
 
     addNewMetric(){
@@ -47,16 +58,16 @@ export class AddMetric extends Component {
     render() {
         return (
             <div className={`addEdit ${this.props.currentScreen} prev-${this.props.lastScreen}`}>
-                {this.props.currentScreen == "AddMetrix" && <div className="header addHeader">
-                    <div onClick={this.cancel}>
+                {(this.props.currentScreen == "AddMetrix" || this.props.lastScreen =="AddMetrix") && <div className="header addHeader">
+                    <div onClick={this.close}>
                         Cancel
                     </div>
                     <div onClick={this.save}>
                         Save
                     </div>
                 </div>}
-                {this.props.currentScreen == "EditMetric" && <div className="header editHeader">
-                <div onClick={this.update}>
+                {(this.props.currentScreen == "EditMetric" || this.props.lastScreen == "EditMetric") && <div className="header editHeader">
+                    <div onClick={this.update}>
                         &lt; Back
                     </div>
                     <div>

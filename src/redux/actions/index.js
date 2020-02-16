@@ -6,6 +6,7 @@ export const UPDATE_METRIC = 'UPDATE_METRIC';
 export const DELETE_METRIC = 'DELETE_METRIC';
 export const SET_INDEX = 'SET_INDEX';
 export const SET_CURRENT_SCREEN = 'SET_CURRENT_SCREEN';
+export const SET_METRIC_TO_UPDATE = 'SET_METRIC_TO_UPDATE';
 
 
 export function setIndex(index) {
@@ -59,6 +60,15 @@ export function updateMetric(updatedMetric, i) {
 		payload: {
 			updatedMetric,
 			i
+		}
+	}
+}
+
+export function setMetricToUpdate(metricToUpdate) {
+	return {
+		type: SET_METRIC_TO_UPDATE,
+		payload: {
+			metricToUpdate
 		}
 	}
 }

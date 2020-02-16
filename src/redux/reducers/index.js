@@ -1,7 +1,8 @@
 
 import { 
     SET_DATA, SET_CURRENT_SCREEN,
-    UPDATE_METRIC_LIST, ADD_NEW_METRIC, UPDATE_METRIC, DELETE_METRIC, SET_INDEX
+    UPDATE_METRIC_LIST, ADD_NEW_METRIC, DELETE_METRIC, SET_INDEX,
+    UPDATE_METRIC, SET_METRIC_TO_UPDATE
 } from "../actions";
 
 function reducerFunc(state, action){
@@ -35,7 +36,13 @@ function reducerFunc(state, action){
         case UPDATE_METRIC:
             return {
                 ...state,
-                metrix: state.metrix.map((metric) => metric.id == action.payload.updatedMetric.id ? action.payload.updatedMetric : metric)
+                metrix: state.metrix.map((metric) => metric.id == action.payload.updatedMetric.id ? action.payload.updatedMetric : metric),
+                metricToUpdate: false
+            }
+        case SET_METRIC_TO_UPDATE:
+            return {
+                ...state,
+                metricToUpdate: action.payload.metricToUpdate
             }
         case DELETE_METRIC:
             return {
