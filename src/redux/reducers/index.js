@@ -12,7 +12,7 @@ function reducerFunc(state, action){
             return{
                 ...state,
                 lastScreen: state.currentScreen,
-                currentScreen: action.payload.screenName
+                currentScreen: action.payload.screenName || 'Home'
 
             }
         case SET_DATA:

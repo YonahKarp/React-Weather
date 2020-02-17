@@ -46,8 +46,8 @@ export function setMenuTransform(menuTransform) {
 	return createAction(SET_MENU_TRANSFORM, {menuTransform})
 }
 
-export function setChartsTransform(chartsTransfom) {
-	return createAction(SET_CHARTS_TRANSFORM, {chartsTransfom})
+export function setChartsTransform(chartsTransform) {
+	return createAction(SET_CHARTS_TRANSFORM, {chartsTransform})
 }
 
 function createAction(type, payload){

@@ -13,16 +13,12 @@ export class DragHandler extends Component {
         )
 	}
 	
-	componentDidMount() {
-		// this.sideMenu.current.style.transform = 'translateX(100%)'
-		// // this.sideMenu.current.style.transform = 'translateX(200px)'
-		// this.charts.current.style.transform = 'translateX(100%)'
-	}
-
     // dragging
-	threshold = 0;
+	threshold = 10;
+	stretchThreshold = 35;
 	isDragging = false;
 	xStretch = 0;
+	offScreen = 105
 
 	getTap = (e) => e.changedTouches[0];
 
@@ -39,35 +35,15 @@ export class DragHandler extends Component {
 			let x1 = tap.clientX
 
 			let dx = x1 - this.x0;
-
-			console.log(dx)
+			const percentage = (dx/window.innerWidth)*100
 
 			if(Math.abs(dx) > this.threshold){
-				if(this.props.currentScreen == "Home"){
-					this.sideMenuMove(dx, x1)
-				} else if(this.props.currentScreen == "Metrix"){
-					const percentage = (dx/window.innerWidth)*100
-					const currentTransfrom = this.charts.current.style.transform;
-					const currentValue = currentTransfrom.match(/-?\d+/)[0];
-					let finalValue = +currentValue + percentage;
-					// let finalValue = +currentValue + dx;
+				if(this.props.currentScreen == "Home")
+					this.menuMove(percentage)
+				else if(this.props.currentScreen == "Metrix")
+					this.chartsMove(percentage)
 
-
-					if (finalValue > 50) {
-						finalValue = 100
-						this.props.setCurrentScreen("Home")
-						this.sideMenu.current.style.transform = 'translateX(40%)'
-
-					} 
-					if(finalValue < 0){finalValue = 0;}					
-					
-
-					// this.sideMenu.current.style.transform = `translateX(${finalValue}%)`
-					this.charts.current.style.transform = `translateX(${finalValue}%)`
-
-					this.x0 = x1
-				}
-			
+				this.x0 = x1
 			}
 		}
 	}
@@ -75,68 +51,85 @@ export class DragHandler extends Component {
 	touchEnd = (e) => {
 		this.isDragging = false;
 		if(this.props.currentScreen == "Home")
-			this.sideMenuEnd()
+			this.menuEnd()
 		else if(this.props.currentScreen == "Metrix"){
-			const currentTransfrom = this.charts.current.style.transform;
-			const currentValue = currentTransfrom.match(/-?\d+/)[0];
-	
-			if(currentValue < 10){
-				this.charts.current.style.transform = `translateX(0)`
-	
-				this.xStretch = 0;
-			} else if (currentValue > 80){
-				this.charts.current.style.transform = `translateX(100%)`
-			}
+			this.chartsEnd()
 		}
 	}
 
-	sideMenuMove(dx, x1) {
-		const percentage = (dx/window.innerWidth)*100
+	//menu
+	menuMove(percentage) {
 		const currentValue = this.props.menuTransform;
-
 		let finalValue = +currentValue + percentage;
-		// let finalValue = +currentValue + dx;
 
-
-		if (finalValue > 102) {finalValue = 102} 
+		if (finalValue > this.offScreen) {finalValue = this.offScreen} 
 		if(finalValue < 50){
 			this.xStretch = this.xStretch - (percentage);
 
-			console.log(Math.sqrt(this.xStretch))
-
-			if(this.xStretch >30){
+			if(this.xStretch > this.stretchThreshold){
 				this.props.setCurrentScreen("Metrix")
 				this.props.setChartsTransform(50);
-				this.charts.current.style.transform = 'translateX(50%)'
+				this.xStretch = 0;
 
 				return;
 			}
-			finalValue = 50 - Math.sqrt(this.xStretch);
+			finalValue = 50 - (Math.sqrt(this.xStretch)|| 0);
 		} else {this.xStretch = 0;}
 		
-		
 		this.props.setMenuTransform(finalValue)
-		// this.sideMenu.current.style.transform = `translateX(${finalValue}%)`
-
-		this.x0 = x1
 	}
 
-	sideMenuEnd() {
+	menuEnd() {
 		const currentValue = this.props.menuTransform;
 
 		if(currentValue < 50){
 			this.props.setMenuTransform(50);
 			this.xStretch = 0;
 		} else if (currentValue > 80){
-			this.props.setMenuTransform(100);
+			this.props.setMenuTransform(this.offScreen);
 		}
+	}
+
+	// charts
+	chartsMove(percentage){
+		const currentValue = this.props.chartsTransform;
+		let finalValue = +currentValue + percentage;
+
+		if (finalValue > 50) {
+			this.xStretch = this.xStretch - (percentage);
+
+			if(this.xStretch < -40){
+				finalValue = this.offScreen
+				this.props.setCurrentScreen("Home")
+				this.props.setMenuTransform(40)
+				this.xStretch = 0;
+
+			}else
+			finalValue = 50 + (Math.sqrt(-this.xStretch)|| 0);
+		} 
+		if(finalValue < 0){finalValue = 0;}					
+		
+		this.props.setChartsTransform(finalValue);
+	}
+
+	chartsEnd() {
+		const currentValue = this.props.chartsTransform;
+	
+		if(currentValue < 10){
+			this.props.setChartsTransform(0)
+
+		} else if (currentValue > 50){
+			this.props.setChartsTransform(50)
+		}
+		this.xStretch = 0;
+
 	}
 }
 
 const mapStateToProps = (state) => ({
 	currentScreen: state.currentScreen,
 	menuTransform: state.menuTransform,
-	chartsTransfrom: state.chartsTransfrom
+	chartsTransform: state.chartsTransform
 })
 
 const mapDispatchToProps = (dispatch) => {
@@ -144,11 +137,11 @@ const mapDispatchToProps = (dispatch) => {
 		setCurrentScreen: (screenName) => {
 			dispatch(setCurrentScreen(screenName))
 		},
-		setMenuTransform: (screenName) => {
-			dispatch(setMenuTransform(screenName))
+		setMenuTransform: (menuTransform) => {
+			dispatch(setMenuTransform(menuTransform))
 		},
-		setChartsTransform: (screenName) => {
-			dispatch(setChartsTransform(screenName))
+		setChartsTransform: (chartsTransform) => {
+			dispatch(setChartsTransform(chartsTransform))
 		}
 	}
 }

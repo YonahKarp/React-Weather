@@ -18,7 +18,8 @@ $font: font;
 
 .semibold{font-weight: 600}
 
-.hide{display: none}
+.hide, .hidden{display: none}
+.display-ib{display: inline-block;}
 .flex{display: flex;}
 
 .left{float: left;}
@@ -32,11 +33,29 @@ $font: font;
     top: -250px;
 }
 
-input{
-    outline: none;
+.smallTitle{
+    padding: 10px;
+    color: grey;
+    font-size: 12px;
+}
+.btn-full{
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    text-align: center;
+    padding: 10px;
+    background: white;
+    color: grey
+
+}
+
+select, input{}
+select:invalid{color: #bbb;}
+
+input,select{
     width: 100%;
     font-size: 16px;
     padding: 5px;
+    outline: none;
 
     &::placeholder {
         color: #bbb;

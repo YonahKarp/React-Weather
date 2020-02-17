@@ -1,37 +1,15 @@
 @import '../constants';
 
 .addEdit{
-    position: absolute;
     z-index: 1000;
     background: white;
-    // top: 0;
-
-    height: 100%;
-    width: 100%;
     transition: transform .6s ease;
 
-    bottom: -100vh;
+    &.add-enter-active{animation: slideUp .6s ease;}
+    &.add-exit-active{animation: slideUp .6s ease-in reverse;}
 
-    &.Home, &.Home.prev-AddMetrix{
-      transform: translateY(0);
-
-    }
-    &.Home.prev-EditMetric{
-      bottom: 0;
-      transform: translateX(100vw);
-    }
-    // &.EditMetric{transform: translateX(0);}
-    // &.AddMetric{transform: translateY(0);}
-
-    &.AddMetrix{
-      animation: slideUp .6s ease;
-      transform: translateY(-100vh)
-    }
-    &.EditMetric{
-      animation: slideRight .6s ease;
-      transform: translateX(0);
-      bottom: 0;
-    }
+    &.edit-enter-active{animation: slideRight .6s ease;}
+    &.edit-exit-active{animation: slideRight .6s ease-in reverse;}
   }
 
 .header{
@@ -49,6 +27,11 @@
   border-bottom: 1px solid lightgray;
 
   color: $iOSBlue;
+
+  .headerTitle{
+    color: black;
+    font-weight: 600;
+  }
 }
 
 .editHeader{
@@ -75,11 +58,132 @@
   background: whitesmoke;
 }
 
+.tag{
+  padding: 5px;
+  margin: 5px 0;
+  box-sizing: border-box;
+  background-color: $colorPurple;
+  display: inline-block;
+  vertical-align: middle;
+  color: white;
+
+}
+
+.traingle{
+  width: 0;
+  height: 0;
+  display: inline-block;
+  vertical-align: middle;
+  border-top: 27px solid transparent;
+  border-left: 17px solid $colorPurple;
+}
+
+
+.typeContainer{
+  background-color: whitesmoke;
+  position: relative;
+
+
+  .icon-list{padding: 10px;}
+  .icon-caret{
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    font-weight: bold;
+    color: grey;
+    padding: 5px;
+    transform: translateY(-50%) rotate(90deg);
+  }
+}
+
+.tagsContainer{
+  align-items: center;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  padding: 0 10px;
+
+  .icon{
+    color: grey;
+  }
+}
+
+.delete-btn{
+  margin-top: 20px;
+  color: darkred;
+}
+
+.moveTo{
+  z-index: 10000;
+  background-color: whitesmoke;
+  top: 0;
+
+  &.moveTo-enter-active{animation: slideUp .5s ease;}
+  &.moveTo-exit-active{animation: slideUp .5s ease-in reverse;}
+
+  .searchbar{
+    padding: 5px;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    border-bottom: 1px solid lightgrey;
+
+    .icon{
+      position: absolute;
+      top: 50%;
+      padding: 5px;
+      transform: translateY(-50%);
+    }
+
+    .icon-search{color: #bbb;pointer-events: none;}
+    .iconX{ right: 5px;}
+    input{
+      text-indent: 20px;
+      border-radius: 5px;
+      border: none;
+    }
+  }
+
+  .listsContainer{
+    margin-top: 20px;
+
+  }
+
+  .listsList{
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    background: white;
+    margin-bottom: 15px;
+
+    .list{
+      display: flex;
+      align-items: center;
+
+      &:not(:last-child) .name{
+        border-bottom: 1px solid lightgray;
+      }
+      .color{
+        height: 8px;
+        width: 8px;
+        margin: 5px;
+        border-radius: 10px;
+      }
+
+      .name{
+        padding: 10px 0;
+        flex-grow: 1;
+      }
+    }
+
+  }
+}
+
+
 
 @keyframes slideUp {
-    0% {transform: translateY(0);}
+    0% {transform: translateY(100vh);}
     100% {
-      transform: translateY(-100vh)
+      transform: translateY(0)
     }
 }
 
