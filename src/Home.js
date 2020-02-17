@@ -90,6 +90,7 @@ export class Home extends Component {
 	threshold = 10;
 	isDragging = false;
 	xStretch = 0;
+	lastRun = Date.now();
 
 	getTap = (e) => e.changedTouches[0];
 
@@ -104,35 +105,10 @@ export class Home extends Component {
 		if(this.isDragging){ 
 			const tap = this.getTap(e);
 			let x1 = tap.clientX
-
 			let dx = x1 - this.x0;
 
 			if(Math.abs(dx) > this.threshold){
-				if(this.props.currentScreen == "Home"){
-					this.sideMenuMove(dx, x1)
-				} else if(this.props.currentScreen == "Metrix"){
-					const percentage = (dx/window.innerWidth)*100
-					const currentTransfrom = this.charts.current.style.transform;
-					const currentValue = currentTransfrom.match(/-?\d+/)[0];
-					let finalValue = +currentValue + percentage;
-					// let finalValue = +currentValue + dx;
-
-
-					if (finalValue > 50) {
-						finalValue = 100
-						this.props.setCurrentScreen("Home")
-						this.sideMenu.current.style.transform = 'translateX(50%)'
-
-					} 
-					if(finalValue < 0){finalValue = 0;}					
-					
-
-					// this.sideMenu.current.style.transform = `translateX(${finalValue}%)`
-					this.charts.current.style.transform = `translateX(${finalValue}%)`
-
-					this.x0 = x1
-				}
-			
+				this.sideMenuMove(dx, x1)
 			}
 		}
 	}
@@ -140,8 +116,18 @@ export class Home extends Component {
 	touchEnd = (e) => {
 		this.isDragging = false;
 		if(this.props.currentScreen == "Home")
-			this.sideMenuEnd()
+			const currentTransfrom = this.sideMenu.current.style.transform;
+			const currentValue = currentTransfrom.match(/-?\d+/)[0];
+
+			if(currentValue < 50){
+				this.sideMenu.current.style.transform = `translateX(50%)`
+
+				this.xStretch = 0;
+			} else if (currentValue > 80){
+				this.sideMenu.current.style.transform = `translateX(100%)`
+			}
 		else if(this.props.currentScreen == "Metrix"){
+			
 			const currentTransfrom = this.charts.current.style.transform;
 			const currentValue = currentTransfrom.match(/-?\d+/)[0];
 	
@@ -156,49 +142,56 @@ export class Home extends Component {
 	}
 
 	sideMenuMove(dx, x1) {
-		const percentage = (dx/window.innerWidth)*300
-		const currentTransfrom = this.sideMenu.current.style.transform;
+		const isHome = this.props.currentScreen == "Home";
+		let target, other, maxPct, minPct
+
+		if(isHome){
+			target = this.sideMenu.current
+			other = this.charts.current
+			maxPct = 102
+			minPct = 50
+		} else{
+			target = this.charts.current
+			other = this.sideMenu.current,
+			maxPct = 50
+			minPct = 0
+		}
+
+		const percentage = (dx/window.innerWidth)*100
+		const currentTransfrom = target.style.transform;
 		const currentValue = currentTransfrom.match(/-?\d+/)[0];
 		let finalValue = +currentValue + percentage;
-		// let finalValue = +currentValue + dx;
 
+		if (finalValue > maxPct) {
+			finalValue = maxPct
 
-		if (finalValue > 100) {finalValue = 100} 
-		if(finalValue < 0){
-			// this.xStretch = this.xStretch - (dx);
-			this.xStretch = this.xStretch - (percentage)/3;
-
-			console.log(this.xStretch)
-
-			if(this.xStretch >20){
-				this.props.setCurrentScreen("Metrix")
-				this.charts.current.style.transform = 'translateX(50%)'
-
-				// console.log()
+			if(!isHome){
+				finalValue = 100
+				this.props.setCurrentScreen("Home")
+				other.style.transform = 'translateX(50%)'
 			}
-			finalValue = 0 - Math.sqrt(this.xStretch);
+		
+		} 
+		if(finalValue < minPct){
+			if(isHome){
+				this.xStretch = this.xStretch - (percentage);
+
+				if(this.xStretch >35){
+					this.props.setCurrentScreen("Metrix")
+					other.style.transform = 'translateX(50%)'
+					this.xStretch = 0
+					finalValue = 0;
+				}
+				finalValue = 50 - Math.sqrt(this.xStretch);
+			}
+
 		} else {this.xStretch = 0;}
 		
-		
-
-		// this.sideMenu.current.style.transform = `translateX(${finalValue}%)`
-		this.sideMenu.current.style.transform = `translateX(${finalValue}%)`
+		target.style.transform = `translateX(${finalValue}%)`
 
 		this.x0 = x1
 	}
 
-	sideMenuEnd() {
-		const currentTransfrom = this.sideMenu.current.style.transform;
-		const currentValue = currentTransfrom.match(/-?\d+/)[0];
-
-		if(currentValue < 0){
-			this.sideMenu.current.style.transform = `translateX(0)`
-
-			this.xStretch = 0;
-		} else if (currentValue > 80){
-			this.sideMenu.current.style.transform = `translateX(100%)`
-		}
-	}
 }
 
 

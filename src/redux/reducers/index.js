@@ -2,7 +2,8 @@
 import { 
     SET_DATA, SET_CURRENT_SCREEN,
     UPDATE_METRIC_LIST, ADD_NEW_METRIC, DELETE_METRIC, SET_INDEX,
-    UPDATE_METRIC, SET_METRIC_TO_UPDATE
+    UPDATE_METRIC, SET_METRIC_TO_UPDATE,
+    SET_MENU_TRANSFORM, SET_CHARTS_TRANSFORM
 } from "../actions";
 
 function reducerFunc(state, action){
@@ -54,6 +55,17 @@ function reducerFunc(state, action){
                 ...state,
                 selectedIndex: action.payload.index
             }
+        case SET_MENU_TRANSFORM:
+            return {
+                ...state,
+                menuTransform: action.payload.menuTransform
+            }
+        case SET_CHARTS_TRANSFORM:
+            return {
+                ...state,
+                chartsTransform: action.payload.chartsTransform
+            }
+            
         default:
             return state;
     } 
