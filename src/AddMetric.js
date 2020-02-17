@@ -16,16 +16,27 @@ export class AddMetric extends Component {
     constructor(props) {
         super(props);
 
-        const metric = props.metric ? 
-            {...props.metric} : {
-                name: '',
-                tagName: 'Home',
-                type: ''
-            }
+        // const metric = props.metric ? 
+        //     {...props.metric} : {
+        //         name: '',
+        //         tagName: 'Home',
+        //         type: '',
+        //         tags: []
+        //     }
+
+        const metric = {
+            name: '',
+            tagName: 'Home',
+            type: '',
+            tags: [],
+            ...props.metric
+        }
         
         this.state = {
-            metric: metric,
-            showMoveTo: false
+            metric,
+            showMoveTo: false,
+            tagsValue: '',
+            selectTagIndex: -1
         }
 
         this.close = this.close.bind(this);
@@ -33,7 +44,8 @@ export class AddMetric extends Component {
         this.update = this.update.bind(this);
         this.addNewMetric = this.addNewMetric.bind(this);
         this.delete = this.delete.bind(this);
-
+        this.tagsChange = this.tagsChange.bind(this);
+        this.tagsKeyPress = this.tagsKeyPress.bind(this);
     }
 
     close() {
@@ -68,12 +80,40 @@ export class AddMetric extends Component {
     }
     
     tagsChange(ev) {
-        console.log(ev)
+        this.setState({
+            tagsValue: ev.target.value,
+            selectTagIndex: -1
+        })
     }
 
     tagsKeyPress(ev) {
-        if(!ev.target.value && ev.keyCode == 8)
-            console.log( "highlight/remove last tag");
+        let value = ev.target.value
+        if(value && ev.keyCode == 13){ //enter
+            this.setState({
+                metric: {
+                    ...this.state.metric,
+                    tags: [
+                        ...this.state.metric.tags,
+                        value
+                    ]
+                },
+                tagsValue: ''
+            })
+         } else if(!value && ev.keyCode == 8){ //backspace
+            if(this.state.selectTagIndex == -1)
+                this.setState({selectTagIndex: this.state.metric.tags.length -1})
+            else{
+                this.state.metric.tags.splice(this.state.selectTagIndex,1)
+                this.setState({
+                    metric: {
+                        ...this.state.metric,
+                        tags: [...this.state.metric.tags],
+                        
+                    },
+                    selectTagIndex: -1
+                }) 
+            }
+        }
     }
 
     render() {
@@ -89,8 +129,8 @@ export class AddMetric extends Component {
                     </div>
                 </div>}
                 {(this.props.currentScreen == "EditMetric" || this.props.lastScreen == "EditMetric") && <div className="header editHeader">
-                    <div onClick={this.update}>
-                        &lt; Back
+                    <div onClick={this.update} className="back-btn">
+                        <span className="icon icon-caret rotate270"></span> Back
                     </div>
                     <div>
                         ?
@@ -140,7 +180,10 @@ export class AddMetric extends Component {
 
                 <div className="tagsContainer flex">
                     <span className="icon icon-tags"></span>
-                    <input placeholder="Tags" onChange={this.tagsChange} onKeyUp={this.tagsKeyPress}/>
+                    {(this.state.metric.tags || []).map((tag, i) => <span key={`tag-${tag}`} className={`tag${this.state.selectTagIndex == i ? ' selected': ''}`}>
+                        {tag}
+                    </span>)}
+                    <input placeholder="Tags" onChange={this.tagsChange} onKeyUp={this.tagsKeyPress} value={this.state.tagsValue}/>
 
                 </div>
 

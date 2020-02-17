@@ -39,6 +39,18 @@
 
   background: $colorDark;
   border-bottom: 1px solid $colorStnd;
+
+  .back-btn{
+    display: flex;
+    align-items: center;
+    padding-left: 0;
+
+    .icon{
+      font-weight: 600;
+      display: block;
+      padding: 0 10px;
+    }
+  }
 }
 
 .metricName{
@@ -104,6 +116,18 @@
 
   .icon{
     color: grey;
+  }
+
+  .tag{
+    font-size: 10px;
+    background-color: slategray;
+    padding: 3px;
+    margin: 0 2px;
+    border-radius: 3px;
+
+    &.selected{
+      background-color: dimgray;
+    }
   }
 }
 

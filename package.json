@@ -24,7 +24,7 @@
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "babel-preset-nano-react-app": "^0.1.0",
-    "gh-pages": "^2.0.1",
+    "gh-pages": "^2.2.0",
     "parcel-bundler": "^1.11.0",
     "sass": "^1.23.7"
   },
