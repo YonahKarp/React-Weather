@@ -36,18 +36,20 @@ export class Forecast extends Component {
 
     scroll(e){
         if(this.state.allowScroll){
-            this.forecastRef.current.scrollBy({left: -e.movementX})
-            this.setState({didDrag: true});
+            const movementX = -e.movementX
+            this.forecastRef.current.scrollBy({left: movementX})
+            this.setState({didDrag: this.state.didDrag + Math.abs(movementX)});
 
         }
+
+        return true
     }
     
     stopScroll(e){
         this.setState({allowScroll: false});
 
         setTimeout(()=>{
-            this.setState({didDrag: false});
-
+            this.setState({didDrag: 0});
         }, 0)
     }
 
@@ -106,7 +108,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		onDayClick: function(index, weather) {
 
-            if(this.state.activeIndex != index && !this.state.didDrag){
+            if(this.state.activeIndex != index && this.state.didDrag < 15){
                 this.setState({activeIndex: index});
 
                 fetch("https://darksky-weather-server.herokuapp.com/?time="+weather.time)

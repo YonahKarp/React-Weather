@@ -95,18 +95,23 @@ body {
   text-align: center;
   display: flex;
   justify-content: center;
-  align-items: center; }
-  .loading .loader > span {
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #444; }
+  .loading div {
+    margin-bottom: 5px; }
+  .loading #loading > span {
     animation: loader 0.9s -0.6s infinite cubic-bezier(0.85, 0.25, 0.37, 0.85);
     border-radius: 5px;
     margin: 2px;
     height: 30px;
     display: inline-block;
     width: 5px;
-    background-color: dimgray; }
-    .loading .loader > span:nth-child(3), .loading .loader > span:nth-child(5) {
+    background-color: #444; }
+    .loading #loading > span:nth-child(3), .loading #loading > span:nth-child(5) {
       animation-delay: -0.4s !important; }
-    .loading .loader > span:nth-child(2), .loading .loader > span:nth-child(6) {
+    .loading #loading > span:nth-child(2), .loading #loading > span:nth-child(6) {
       animation-delay: -0.2s !important; }
 
 @keyframes loader {

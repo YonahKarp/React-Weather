@@ -10,6 +10,7 @@ import MoreInfo from './MoreInfo';
 
 import Timeline from './Timeline';
 import Forecast from './Forecast';
+import { Loading } from './Loader'
 
 
 let API = "https://darksky-weather-server.herokuapp.com/";
@@ -24,6 +25,7 @@ export class App extends Component {
 			.then((res) => res.json())
 			.then(json => {
 				this.props.onDataFetched(json)
+				
 			}).catch(() => {
 				console.log("data failed")
 				this.props.onDataFetched(mockData)
@@ -42,16 +44,7 @@ export class App extends Component {
 					<Forecast/>
 					<div className="attribution">Powered by Dark Sky</div>
 				</div>}
-				{!this.props.doneLoading && <div className="Loading">
-					<div className="loader">
-						<div>Loading</div>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-					</div>
-				</div>}
+				{!this.props.doneLoading && <Loading/>}
 			</div>
 		)
 	}
